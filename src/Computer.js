@@ -4,6 +4,8 @@ import { Html, useGLTF } from '@react-three/drei'
 
 export default function Computer(props) {
   const group = useRef()
+  const screen = useRef()
+
   const { nodes, materials } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf')
   return (
     <group ref={group} {...props} dispose={null}>
@@ -36,13 +38,16 @@ export default function Computer(props) {
 <mesh geometry={nodes.Circle002_1.geometry} material={materials.Screen} />
 <mesh geometry={nodes.Circle002_2.geometry} material={materials.ScreenGlass} />
 <mesh geometry={nodes.Circle002_3.geometry} material={materials.Rubber} />
-<mesh geometry={nodes.Circle002_4.geometry} material={materials.DisplayGlass}>
+<mesh ref={screen} geometry={nodes.Circle002_4.geometry} material={materials.DisplayGlass}>
     <Html
         transform
         wrapperClass='htmlScreen'
         distanceFactor={1.9}
         position={[0, -0.09, -1.9]}
         rotation-x={-1.56}
+        castShadow
+        receiveShadow
+        material={<meshPhysicalMaterial opacity={0.1} />}
     ><iframe src="https://rherault.dev"/></Html>
 </mesh>
 </group>
