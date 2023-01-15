@@ -1,10 +1,10 @@
+import * as THREE from 'three'
 import React, { useRef } from 'react'
 import { Html, useGLTF } from '@react-three/drei'
 
 
 export default function Computer(props) {
   const group = useRef()
-  const screen = useRef()
 
   const { nodes, materials } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf')
   return (
@@ -38,18 +38,8 @@ export default function Computer(props) {
 <mesh geometry={nodes.Circle002_1.geometry} material={materials.Screen} />
 <mesh geometry={nodes.Circle002_2.geometry} material={materials.ScreenGlass} />
 <mesh geometry={nodes.Circle002_3.geometry} material={materials.Rubber} />
-<mesh ref={screen} geometry={nodes.Circle002_4.geometry} material={materials.DisplayGlass}>
-    <Html
-        transform
-        wrapperClass='htmlScreen'
-        distanceFactor={1.9}
-        position={[0, -0.09, -1.9]}
-        rotation-x={-1.56}
-        castShadow
-        receiveShadow
-        material={<meshPhysicalMaterial opacity={0.1} />}
-    ><iframe src="https://rherault.dev"/></Html>
-</mesh>
+<mesh geometry={nodes.Circle002_4.geometry} material={materials.DisplayGlass} />
+<Browser />
 </group>
 <group position={[-15.03, 0.03, 0.6,]} scale={5.8} >
 <mesh geometry={nodes.Circle009.geometry} material={nodes.Circle009.material} />
@@ -66,3 +56,17 @@ export default function Computer(props) {
 }
 
 useGLTF.preload('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/macbook/model.gltf')
+
+function Browser() {
+    return (
+        <group>
+            <Html wrapperClass='htmlScreen' prepend transform distanceFactor={1.9} position={[0, -0.09, -1.9]} rotation-x={-1.56}>
+                <iframe src="https://rherault.dev"/>
+            </Html>
+            <mesh castShadow receiveShadow>
+                <planeGeometry args={[2.24, 1.26]} />
+                <meshPhysicalMaterial roughness={0.0} blending={THREE.NoBlending} opacity={0.1} color={0x0303030} side={THREE.DoubleSide} />
+            </mesh>
+        </group>
+    )
+}

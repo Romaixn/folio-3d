@@ -1,6 +1,8 @@
 import { Text, ContactShadows, PresentationControls, Float, Environment } from '@react-three/drei'
 import Computer from './Computer'
 import Mobile from './Mobile'
+import Target from './Target'
+import Lightning from './Lightning'
 import { useState, useEffect } from 'react'
 
 export default function Experience()
@@ -32,6 +34,18 @@ export default function Experience()
             config={{ mass: 2, tension: 400 }}
             snap={{ mass: 4, tension: 400 }}
         >
+            <Float>
+                <Target
+                    position={isMobile ? [2, 1, -1] : [4, 1, -1]}
+                    rotation={[0, -0.5, 0]}
+                />
+            </Float>
+
+            <Float>
+                <Lightning
+                    position={isMobile ? [-0.5, 0, -0.6] : [-1.5, 1.2, -2]}
+                />
+            </Float>
             <Float rotationIntensity={0.4}>
                 <rectAreaLight
                     width={2.5}
@@ -46,15 +60,17 @@ export default function Experience()
                     : <Computer position-y={-1.2} />
                 }
 
-                <Text
-                    font="./bangers-v20-latin-regular.woff"
-                    fontSize={1}
-                    position={[2, 0.5, 0]}
-                    rotation-y={-1.25}
-                    maxWidth={2}
-                    textAlign="center"
-                    castShadow={false}
-                >ROMAIN HERAULT</Text>
+                {!isMobile &&
+                    <Text
+                        font="./bangers-v20-latin-regular.woff"
+                        fontSize={1}
+                        position={[2, 0.5, 0]}
+                        rotation-y={-1.25}
+                        maxWidth={2}
+                        textAlign="center"
+                        castShadow={false}
+                    >ROMAIN HERAULT</Text>
+                }
             </Float>
         </PresentationControls>
 
