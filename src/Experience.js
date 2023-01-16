@@ -46,6 +46,7 @@ export default function Experience()
                     position={isMobile ? [-0.5, 0, -0.6] : [-1.5, 1.2, -2]}
                 />
             </Float>
+
             <Float rotationIntensity={0.4}>
                 <rectAreaLight
                     width={2.5}
