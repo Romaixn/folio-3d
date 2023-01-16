@@ -63,10 +63,6 @@ function Browser() {
             <Html wrapperClass='htmlScreen' prepend transform distanceFactor={1.9} position={[0, -0.09, -1.9]} rotation-x={-1.56}>
                 <iframe src="https://rherault.dev"/>
             </Html>
-            <mesh castShadow receiveShadow>
-                <planeGeometry args={[2.24, 1.26]} />
-                <meshPhysicalMaterial roughness={0.0} blending={THREE.NoBlending} opacity={0.1} color={0x0303030} side={THREE.DoubleSide} />
-            </mesh>
         </group>
     )
 }
